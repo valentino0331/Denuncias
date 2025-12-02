@@ -116,8 +116,8 @@ exports.verifyEmail = async (req, res) => {
 exports.login = async (req, res) => {//--Log
     const { email, password } = req.body;
 
-    console.log('🔍 Intento de login:', email);
-    console.log('📝 Password recibido:', password);
+    console.log('Intento de login:', email);
+    console.log('Password recibido:', password);
 
     try {
         const result = await pool.query(

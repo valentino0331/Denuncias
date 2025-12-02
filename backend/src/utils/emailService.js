@@ -3,10 +3,10 @@ require('dotenv').config();
 
 // Configurar transportador de email
 const transporter = nodemailer.createTransport({
-  service: 'gmail', // o 'outlook', 'yahoo', etc.
-    auth: {
-    user: process.env.EMAIL_USER, // tu email
-    pass: process.env.EMAIL_PASSWORD, // tu contraseña de aplicación
+    service: 'gmail',
+        auth: {
+        user: process.env.EMAIL_USER, 
+            pass: process.env.EMAIL_PASSWORD, 
     },
 });
 
