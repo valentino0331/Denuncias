@@ -1,6 +1,6 @@
 const API_URL = 'http://localhost:5000/api';
 
-// Helper para manejar respuestas
+
 const handleResponse = async (response) => {
     const data = await response.json();
     if (!response.ok) {
@@ -9,10 +9,10 @@ const handleResponse = async (response) => {
     return data;
 };
 
-// Helper para obtener token
+
 const getToken = () => localStorage.getItem('token');
 
-// Autenticación
+
 export const authAPI = {
     register: async (userData) => {
         const response = await fetch(`${API_URL}/auth/register`, {

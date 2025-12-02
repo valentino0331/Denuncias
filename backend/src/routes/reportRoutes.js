@@ -3,7 +3,7 @@ const router = express.Router();
 const reportController = require('../controllers/reportController');
 const { verifyToken, verifyAdmin } = require('../middleware/auth');
 
-// Rutas protegidas
+
 router.post('/', verifyToken, reportController.createReport);
 router.get('/my-reports', verifyToken, reportController.getUserReports);
 router.get('/all', verifyToken, verifyAdmin, reportController.getAllReports);

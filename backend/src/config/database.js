@@ -9,7 +9,6 @@ const pool = new Pool({
     port: process.env.DB_PORT || 5432,
 });
 
-// Crear tablas si no existen
 const createTables = async () => {
     const client = await pool.connect();
     try {

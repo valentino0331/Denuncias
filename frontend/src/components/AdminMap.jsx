@@ -48,7 +48,7 @@ const AdminMap = ({ reports, getTypeColor }) => {
 
                     return (
                         <React.Fragment key={report.id}>
-                            {/* Puntos del área */}
+
                             {points.map((point, idx) => (
                                 <React.Fragment key={`${report.id}-point-${idx}`}>
                                     <Marker
@@ -78,7 +78,7 @@ const AdminMap = ({ reports, getTypeColor }) => {
                                 </React.Fragment>
                             ))}
 
-                            {/* Ubicación exacta */}
+
                             {exactLoc && (
                                 <Marker
                                     position={[exactLoc.lat, exactLoc.lng]}
