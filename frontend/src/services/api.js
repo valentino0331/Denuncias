@@ -1,5 +1,4 @@
-const API_URL = 'http://localhost:5000/api';
-
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 const handleResponse = async (response) => {
     const data = await response.json();
@@ -9,9 +8,7 @@ const handleResponse = async (response) => {
     return data;
 };
 
-
 const getToken = () => localStorage.getItem('token');
-
 
 export const authAPI = {
     register: async (userData) => {
@@ -40,9 +37,35 @@ export const authAPI = {
         });
         return handleResponse(response);
     },
+
+    verify: async (token) => {
+        const response = await fetch(`${API_URL}/auth/verify`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        return handleResponse(response);
+    },
+
+    forgotPassword: async (email) => {
+        const response = await fetch(`${API_URL}/auth/forgot-password`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email }),
+        });
+        return handleResponse(response);
+    },
+
+    resetPassword: async (email, code, newPassword) => {
+        const response = await fetch(`${API_URL}/auth/reset-password`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, code, newPassword }),
+        });
+        return handleResponse(response);
+    },
 };
 
-// Reportes
 export const reportsAPI = {
     create: async (reportData) => {
         const response = await fetch(`${API_URL}/reports`, {

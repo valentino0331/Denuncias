@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents, Circle } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents, Circle, Polygon } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -93,6 +93,18 @@ const ReportMap = ({ points, exactLocation, onAddPoint, onSetExactLocation, mode
                         </React.Fragment>
                     )
                 ))}
+
+                {points.length === 3 && (
+                    <Polygon
+                        positions={points.map(p => [p.lat, p.lng])}
+                        pathOptions={{
+                            color: '#ef4444',
+                            fillColor: '#ef4444',
+                            fillOpacity: 0.4,
+                            weight: 2
+                        }}
+                    />
+                )}
 
 
                 {exactLocation && exactLocation.lat !== undefined && exactLocation.lng !== undefined && (

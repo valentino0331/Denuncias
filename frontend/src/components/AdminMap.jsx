@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Circle, Polygon } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 const AdminMap = ({ reports, getTypeColor }) => {
     const mapRef = useRef();
-    const defaultCenter = [-5.1945, -80.6328]; 
+    const defaultCenter = [-5.1945, -80.6328];
 
     const createTypeIcon = (type) => {
         const color = getTypeColor(type);
@@ -78,6 +78,18 @@ const AdminMap = ({ reports, getTypeColor }) => {
                                 </React.Fragment>
                             ))}
 
+                            {/* Polígono rojo para áreas de 3 puntos */}
+                            {points.length === 3 && (
+                                <Polygon
+                                    positions={points.map(p => [p.lat, p.lng])}
+                                    pathOptions={{
+                                        color: '#ef4444',
+                                        fillColor: '#ef4444',
+                                        fillOpacity: 0.4,
+                                        weight: 2
+                                    }}
+                                />
+                            )}
 
                             {exactLoc && (
                                 <Marker
@@ -98,7 +110,7 @@ const AdminMap = ({ reports, getTypeColor }) => {
                 })}
             </MapContainer>
 
-            {}
+            { }
             <div className="absolute bottom-4 right-4 bg-white/95 px-4 py-3 rounded-lg shadow-lg z-[1000]">
                 <p className="text-xs font-semibold text-gray-700 mb-2">Leyenda</p>
                 <div className="space-y-1 text-xs">

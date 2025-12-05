@@ -52,16 +52,6 @@ const createTables = async () => {
     );
     `);
 
-        await client.query(`
-        CREATE TABLE IF NOT EXISTS password_resets (
-            id SERIAL PRIMARY KEY,
-            email VARCHAR(255) NOT NULL,
-            code VARCHAR(6) NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            expires_at TIMESTAMP NOT NULL
-        );
-        `);
-
         console.log('Tablas creadas exitosamente');
     } catch (error) {
         console.error('Error creando tablas:', error);

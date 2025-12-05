@@ -3,6 +3,7 @@ import { Shield } from 'lucide-react';
 import { authAPI } from '../services/api';
 import RegisterScreen from './RegisterScreen';
 import VerificationScreen from './VerificationScreen';
+import ForgotPasswordScreen from './ForgotPasswordScreen';
 
 const LoginScreen = ({
     onLogin,
@@ -17,6 +18,7 @@ const LoginScreen = ({
     const [loginData, setLoginData] = useState({ email: '', password: '' });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [showForgotPassword, setShowForgotPassword] = useState(false);
 
     const handleLogin = async () => {
         setError('');
@@ -52,6 +54,8 @@ const LoginScreen = ({
                     setShowVerification={setShowVerification}
                     setPendingEmail={setPendingEmail}
                 />
+            ) : showForgotPassword ? (
+                <ForgotPasswordScreen setShowForgotPassword={setShowForgotPassword} />
             ) : (
                 <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
                     <div className="text-center mb-8">
@@ -64,8 +68,8 @@ const LoginScreen = ({
                         <button
                             onClick={() => setIsAdmin(false)}
                             className={`flex-1 py-3 rounded-lg transition-colors ${!isAdmin
-                                    ? 'bg-indigo-600 text-white'
-                                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                                ? 'bg-indigo-600 text-white'
+                                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                                 }`}
                         >
                             Usuario
@@ -73,8 +77,8 @@ const LoginScreen = ({
                         <button
                             onClick={() => setIsAdmin(true)}
                             className={`flex-1 py-3 rounded-lg transition-colors ${isAdmin
-                                    ? 'bg-indigo-600 text-white'
-                                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                                ? 'bg-indigo-600 text-white'
+                                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                                 }`}
                         >
                             Admin
@@ -112,6 +116,14 @@ const LoginScreen = ({
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                                 placeholder={isAdmin ? 'Contraseña' : 'Contraseña'}
                             />
+                            <div className="flex justify-end mt-1">
+                                <button
+                                    onClick={() => setShowForgotPassword(true)}
+                                    className="text-sm text-indigo-600 hover:text-indigo-800 font-medium"
+                                >
+                                    ¿Olvidaste tu contraseña?
+                                </button>
+                            </div>
                         </div>
 
                         <button
@@ -131,14 +143,6 @@ const LoginScreen = ({
                             </button>
                         )}
                     </div>
-
-                    {isAdmin && (
-                        <div className="mt-6 p-4 bg-blue-50 rounded-lg text-sm text-gray-700">
-                            <p className="font-semibold mb-1">Credenciales de prueba (Administradr):</p>
-                            <p>Usuario: <span className="font-mono">policianacional@denuncias.com</span></p>
-                            <p>Contraseña: <span className="font-mono">admin123</span></p>
-                        </div>
-                    )}
                 </div>
             )}
         </div>
